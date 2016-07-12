@@ -1,0 +1,10 @@
+.idea
+#filetypes
+*.jar
+*.sh
+*.iml
+assembly.sh
+#directories
+jar/
+target
+src/properties
