@@ -1,4 +1,5 @@
-#SimpleAssistant
+# Simple Assistant
 
-simple village assistant
-using selenium htmlunitdriver
+    simple village assistant
+
+  - using selenium HtmlUnit-Driver

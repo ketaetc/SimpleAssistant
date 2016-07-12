@@ -1,6 +1,6 @@
 package ketaetc.travian.main;
 
-import ketaetc.travian.http.Connector;
+import ketaetc.travian.html.Connector;
 import ketaetc.travian.util.DateFormatter;
 import ketaetc.travian.util.PropertyReader;
 

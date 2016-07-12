@@ -1,4 +1,4 @@
-package ketaetc.travian.http;
+package ketaetc.travian.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import ketaetc.travian.util.PropertyReader;
