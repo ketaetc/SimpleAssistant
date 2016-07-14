@@ -24,10 +24,6 @@ public class SimpleAssistant {
         conn.tryToLogin();
         conn.getResources();
 
-        System.out.println("wood:   " + conn.getWood() + "\n"
-                           + "clay:    " + conn.getClay() + "\n"
-                           + "iron:    " + conn.getIron() + "\n"
-                           + "wheat:   " + conn.getWheat());
         System.out.println("\n########################################");
         System.out.println("END at: " + DateFormatter.getTime());
         System.out.println("########################################");

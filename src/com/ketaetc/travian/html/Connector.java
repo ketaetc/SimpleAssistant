@@ -49,22 +49,18 @@ public class Connector {
 
     private void handleParam(String p) throws Exception {
         if (p == null || p.equals("") || p.trim().length() == 0) {
-            throw new Exception("Параметр " + p + " не должен быть пустым");
+            throw new Exception("Parameter " + p + " shouldn't be null!");
         }
     }
 
     public void setConnection() {
+        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit")
+                .setLevel(java.util.logging.Level.OFF);
 
-        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
-
-//        wd = new HtmlUnitDriver(new BrowserVersion("Firefox", "5.0", USER_AGENT_L, 47.0f), true);
         wd = new HtmlUnitDriver(BrowserVersion.FIREFOX_38);
         wd.getBrowserVersion().setUserAgent(USER_AGENT_L);
         wd.setJavascriptEnabled(true);
-
-//        wd.navigate().to(this.url);
         wd.get(this.url);
-
     }
 
     public void closeBrowser() {
@@ -73,21 +69,17 @@ public class Connector {
     }
 
     public void tryToLogin() {
-
         wd.findElement(By.xpath("//input[@name='name']")).sendKeys(this.login);
         wd.findElement(By.xpath("//input[@name='password']")).sendKeys(this.password);
         wd.findElement(By.xpath("//*[@name='lowRes']")).sendKeys("1");
         wd.findElement(By.xpath("//button[@type='submit']")).click();
-
     }
 
     public void getResources() {
-
         this.wood = Integer.parseInt(wd.findElement(By.id("l1")).getText().replace(".", ""));
         this.clay = Integer.parseInt(wd.findElement(By.id("l2")).getText().replace(".", ""));
         this.iron = Integer.parseInt(wd.findElement(By.id("l3")).getText().replace(".", ""));
         this.wheat = Integer.parseInt(wd.findElement(By.id("l4")).getText().replace(".", ""));
-
     }
 
     public int getWood() {

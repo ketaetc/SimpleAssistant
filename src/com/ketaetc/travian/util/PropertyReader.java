@@ -37,8 +37,8 @@ public class PropertyReader {
     }
 
     public void getProperties() {
-        String propPath = "conf.properties";
-        String appPropPath = "jar/app/conf.properties";
+        final String propPath = "conf.properties";
+        final String appPropPath = "jar/app/conf.properties";
 
         prop = new Properties();
 
@@ -78,11 +78,19 @@ public class PropertyReader {
                     prop.setProperty("url", url);
                 }
                 prop.store(out, "");
+
+                System.out.println("Property file read successfully!");
+                System.out.println("Properties are:");
+                System.out.println("LOGIN: " + login);
+                System.out.println("PASSWORD: " + password);
+                System.out.println("URL: " + url);
             } catch (NullPointerException e) {
                 e.printStackTrace();
+                System.out.println("Something goes wrong...");
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Something goes wrong...");
         }
     }
 
