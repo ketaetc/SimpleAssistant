@@ -20,7 +20,7 @@ public class PropertyReader {
     private String password;
     private String url;
 
-    public PropertyReader() {
+    public PropertyReader() throws IOException {
         getProperties();
     }
 
@@ -36,9 +36,8 @@ public class PropertyReader {
         return false;
     }
 
-    public void getProperties() {
+    public void getProperties() throws IOException {
         final String propPath = "conf.properties";
-        final String appPropPath = "jar/app/conf.properties";
 
         prop = new Properties();
 
@@ -46,10 +45,14 @@ public class PropertyReader {
             File f = new File(propPath);
             FileInputStream fis;
             sc = new Scanner(System.in);
+            boolean flag;
+            flag = false;
             if (f.exists()) {
                 fis = new FileInputStream(f);
+                flag = true;
             } else {
-                f = new File(appPropPath);
+                PropertyCreator pc = new PropertyCreator();
+                f = pc.createPropFile();
                 fis = new FileInputStream(f);
             }
             prop.load(fis);
@@ -79,11 +82,10 @@ public class PropertyReader {
                 }
                 prop.store(out, "");
 
-                System.out.println("Property file read successfully!");
-                System.out.println("Properties are:");
-                System.out.println("LOGIN: " + login);
-                System.out.println("PASSWORD: " + password);
-                System.out.println("URL: " + url);
+                if (flag) {
+                    StringTemplates st = new StringTemplates();
+                    st.printLoginInfo(login, password, url);
+                }
             } catch (NullPointerException e) {
                 e.printStackTrace();
                 System.out.println("Something goes wrong...");

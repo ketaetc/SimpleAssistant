@@ -2,6 +2,7 @@ package ketaetc.travian.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import ketaetc.travian.util.PropertyReader;
+import ketaetc.travian.util.StringTemplates;
 import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -18,10 +19,13 @@ public class Connector {
     private int iron;
     private int wheat;
     private HtmlUnitDriver wd;
+    private String targetUrl;
 
     final String USER_AGENT_L = "Mozilla/5.0 (X11; Linux x86_64)"
                                 + " AppleWebKit/537.36 (KHTML, like Gecko)"
                                 + " Ubuntu Chromium/51.0.2704.79 Chrome/51.0.2704.79 Safari/537.36";
+    final String DORF_1 = "/dorf1.php";
+    final String DORF_2 = "/dorf2.php";
 
     public Connector(String login, String password, String url) throws Exception {
         handleParam(login);
@@ -31,20 +35,12 @@ public class Connector {
         this.login = login;
         this.password = password;
         this.url = url;
-
-        System.out.println("LOGIN:  " + login + "\n"
-                           + "PASSWORD:    " + password + "\n"
-                           + "URL: " + url);
     }
 
     public Connector(PropertyReader pr) {
         this.login = pr.getLogin();
         this.password = pr.getPassword();
         this.url = pr.getUrl();
-
-        System.out.println("LOGIN:  " + this.login + "\n"
-                           + "PASSWORD:    " + this.password + "\n"
-                           + "URL: " + this.url);
     }
 
     private void handleParam(String p) throws Exception {
@@ -61,6 +57,8 @@ public class Connector {
         wd.getBrowserVersion().setUserAgent(USER_AGENT_L);
         wd.setJavascriptEnabled(true);
         wd.get(this.url);
+
+        tryToLogin();
     }
 
     public void closeBrowser() {
@@ -69,34 +67,18 @@ public class Connector {
     }
 
     public void tryToLogin() {
-        wd.findElement(By.xpath("//input[@name='name']")).sendKeys(this.login);
-        wd.findElement(By.xpath("//input[@name='password']")).sendKeys(this.password);
-        wd.findElement(By.xpath("//*[@name='lowRes']")).sendKeys("1");
-        wd.findElement(By.xpath("//button[@type='submit']")).click();
+        try {
+            wd.findElement(By.xpath("//input[@name='name']")).sendKeys(this.login);
+            wd.findElement(By.xpath("//input[@name='password']")).sendKeys(this.password);
+            wd.findElement(By.xpath("//*[@name='lowRes']")).sendKeys("1");
+            wd.findElement(By.xpath("//button[@type='submit']")).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+            StringTemplates.pringSGW();
+        }
     }
 
-    public void getResources() {
-        this.wood = Integer.parseInt(wd.findElement(By.id("l1")).getText().replace(".", ""));
-        this.clay = Integer.parseInt(wd.findElement(By.id("l2")).getText().replace(".", ""));
-        this.iron = Integer.parseInt(wd.findElement(By.id("l3")).getText().replace(".", ""));
-        this.wheat = Integer.parseInt(wd.findElement(By.id("l4")).getText().replace(".", ""));
+    public HtmlUnitDriver getDriver() {
+        return wd;
     }
-
-    public int getWood() {
-        return this.wood;
-    }
-
-    public int getClay() {
-        return this.clay;
-    }
-
-    public int getIron() {
-        return this.iron;
-    }
-
-    public int getWheat() {
-        return this.wheat;
-    }
-
-
 }
