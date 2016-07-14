@@ -10,59 +10,50 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * Date: 13.07.16 1:07
  */
 public class Connector {
-
     private String login;
     private String password;
     private String url;
-
     private int wood;
     private int clay;
     private int iron;
     private int wheat;
-
     private HtmlUnitDriver wd;
 
-    final String USER_AGENT_L = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)" +
-            " Ubuntu Chromium/51.0.2704.79 Chrome/51.0.2704.79 Safari/537.36";
-    final String USER_AGENT_W = "";
+    final String USER_AGENT_L = "Mozilla/5.0 (X11; Linux x86_64)"
+                                + " AppleWebKit/537.36 (KHTML, like Gecko)"
+                                + " Ubuntu Chromium/51.0.2704.79 Chrome/51.0.2704.79 Safari/537.36";
 
-
-    public Connector (String login, String password, String url) throws Exception {
-
+    public Connector(String login, String password, String url) throws Exception {
         handleParam(login);
         handleParam(password);
         handleParam(url);
-
 
         this.login = login;
         this.password = password;
         this.url = url;
 
         System.out.println("LOGIN:  " + login + "\n"
-                + "PASSWORD:    " + password + "\n"
-                + "URL: " + url);
-
+                           + "PASSWORD:    " + password + "\n"
+                           + "URL: " + url);
     }
 
-    public Connector (PropertyReader pr) {
-
-        this.login =  pr.getLogin();
+    public Connector(PropertyReader pr) {
+        this.login = pr.getLogin();
         this.password = pr.getPassword();
         this.url = pr.getUrl();
 
         System.out.println("LOGIN:  " + this.login + "\n"
-                + "PASSWORD:    " + this.password + "\n"
-                + "URL: " + this.url);
-
+                           + "PASSWORD:    " + this.password + "\n"
+                           + "URL: " + this.url);
     }
 
-    private void handleParam (String p) throws Exception {
+    private void handleParam(String p) throws Exception {
         if (p == null || p.equals("") || p.trim().length() == 0) {
             throw new Exception("Параметр " + p + " не должен быть пустым");
         }
     }
 
-    public void setConnection () {
+    public void setConnection() {
 
         java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
 
@@ -76,12 +67,12 @@ public class Connector {
 
     }
 
-    public void closeBrowser () {
+    public void closeBrowser() {
         wd.close();
         wd.quit();
     }
 
-    public void tryToLogin () {
+    public void tryToLogin() {
 
         wd.findElement(By.xpath("//input[@name='name']")).sendKeys(this.login);
         wd.findElement(By.xpath("//input[@name='password']")).sendKeys(this.password);
@@ -90,7 +81,7 @@ public class Connector {
 
     }
 
-    public void getResources () {
+    public void getResources() {
 
         this.wood = Integer.parseInt(wd.findElement(By.id("l1")).getText().replace(".", ""));
         this.clay = Integer.parseInt(wd.findElement(By.id("l2")).getText().replace(".", ""));
@@ -99,23 +90,21 @@ public class Connector {
 
     }
 
-    public int getWood () {
+    public int getWood() {
         return this.wood;
     }
 
-    public int getClay () {
+    public int getClay() {
         return this.clay;
     }
 
-    public int getIron () {
+    public int getIron() {
         return this.iron;
     }
 
-    public int getWheat () {
+    public int getWheat() {
         return this.wheat;
     }
-
-
 
 
 }
