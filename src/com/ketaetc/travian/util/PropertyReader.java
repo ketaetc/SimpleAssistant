@@ -87,12 +87,12 @@ public class PropertyReader {
                     st.printLoginInfo(login, password, url);
                 }
             } catch (NullPointerException e) {
-                e.printStackTrace();
                 System.out.println("Something goes wrong...");
+                e.printStackTrace();
             }
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Something goes wrong...");
+            e.printStackTrace();
         }
     }
 

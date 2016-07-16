@@ -1,7 +1,7 @@
 package ketaetc.travian.main;
 
 import ketaetc.travian.html.Connector;
-import ketaetc.travian.html.Resources;
+import ketaetc.travian.html.ResourcesInfo;
 import ketaetc.travian.util.DateFormatter;
 import ketaetc.travian.util.PropertyReader;
 import ketaetc.travian.util.StringTemplates;
@@ -24,7 +24,7 @@ public class SimpleAssistant {
 
         conn.setConnection();
 
-        Resources res = new Resources(conn);
+        ResourcesInfo res = new ResourcesInfo(conn);
         res.prinResources();
 
         System.out.println("\n" + StringTemplates.LINE);

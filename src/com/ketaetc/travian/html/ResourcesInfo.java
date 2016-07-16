@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Author: ketaetc (ketaetc@gmail.com)
  * Date: 15.07.16 1:35
  */
-public class Resources {
+public class ResourcesInfo {
     private final String WOOD = "wood";
     private final String CLAY = "clay";
     private final String IRON = "iron";
@@ -24,7 +24,7 @@ public class Resources {
 
     Connector conn;
 
-    public Resources(Connector conn) {
+    public ResourcesInfo(Connector conn) {
         this.conn = conn;
 
         try {

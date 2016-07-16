@@ -14,18 +14,11 @@ public class Connector {
     private String login;
     private String password;
     private String url;
-    private int wood;
-    private int clay;
-    private int iron;
-    private int wheat;
     private HtmlUnitDriver wd;
-    private String targetUrl;
 
     final String USER_AGENT_L = "Mozilla/5.0 (X11; Linux x86_64)"
                                 + " AppleWebKit/537.36 (KHTML, like Gecko)"
                                 + " Ubuntu Chromium/51.0.2704.79 Chrome/51.0.2704.79 Safari/537.36";
-    final String DORF_1 = "/dorf1.php";
-    final String DORF_2 = "/dorf2.php";
 
     public Connector(String login, String password, String url) throws Exception {
         handleParam(login);
